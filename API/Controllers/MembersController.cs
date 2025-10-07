@@ -1,32 +1,29 @@
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using API.Data;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Controllers
+namespace API.Controllers;
+
+public class MembersController(AppDbContext context) : BaseApiController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class MembersController(AppDbContext context) : ControllerBase
+    [HttpGet]
+    public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers()
     {
-        [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<AppUser>>> GetMembers()
-        {
-            var members = await context.Users.ToListAsync();
+        var members = await context.Users.ToListAsync();
 
-            return members;
-        }
+        return members;
+    }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<AppUser>> GetMember(string id)
+    [HttpGet("{id}")]
+    public async Task<ActionResult<AppUser>> GetMember(string id)
+    {
+        var member = await context.Users.FindAsync(id);
+        if (member is null)
         {
-            var member = await context.Users.FindAsync(id);
-            if (member is null)
-            {
-                return NotFound();
-            }
-            return member;
+            return NotFound();
         }
+        return member;
     }
 }
+
