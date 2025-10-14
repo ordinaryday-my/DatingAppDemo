@@ -15,6 +15,7 @@ namespace API.Controllers;
 /// 此控制器用于处理用户账户相关的操作
 /// </summary>
 /// <param name="context">注入的数据库上下文</param>
+/// <param name="tokenService">注入的令牌服务</param>
 public class AccountController(AppDbContext context, ITokenService tokenService) : BaseApiController
 {
 

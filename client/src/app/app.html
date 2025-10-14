@@ -1,14 +1,9 @@
-<div class="card bg=base-100 w-1/2 mx-auto p-10 mt-10 shadow-xl">
-    <h1 class="text-2xl text-red-500 font-medium">{{ title }} !!!</h1>
+<app-nav/>
 
-    <ul class="list">
-        @for (member of members(); track member.id) {
-        <li class="list-center list-row">
-            <img src="user.svg" alt="User Avatar" class="size-12 rounded-box">
-            <div>
-                {{member.displayName}}
-            </div>
-        </li>
-        }
-    </ul>
+<div 
+    [class.mt-24]="router.url !== '/'"
+    [class.container]="router.url !== '/'"
+    [class.mx-auto]="router.url !== '/'"
+>
+    <router-outlet/>
 </div>
