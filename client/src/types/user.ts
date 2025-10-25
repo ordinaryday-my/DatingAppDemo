@@ -6,7 +6,7 @@ export interface User {
     imageUrl?: string;
 }
 
-export interface LoginCreds  {
+export interface LoginCreds {
     email: string;
     password: string;
 }
